@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Nav from './Component/Nav';
+import Board3 from './Component/Board3';
+import Board2 from './Component/Board2';
+import Board from './Component/Board';
 
 function App() {
+  const [selectedData, setSelectedData] = useState('');
+
+  const renderSelectedComponent = () => {
+    if (selectedData === 'User Name') {
+      return <Board3 />;
+    } else if (selectedData === 'Priority') {
+      return <Board2 />;
+    } else {
+      return <Board />;
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Nav onDataSelected={setSelectedData} />
+      {renderSelectedComponent()}
     </div>
   );
 }
 
 export default App;
+
